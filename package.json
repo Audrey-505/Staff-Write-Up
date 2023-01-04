@@ -1,0 +1,32 @@
+{
+  "name": "employeehtml",
+  "version": "1.0.0",
+  "description": "this program will allow user to insert various employee details",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Audrey-505/Staff-Write-Up.git"
+  },
+  "keywords": [
+    "inquirer",
+    "jest",
+    "node"
+  ],
+  "author": "Audrey Alcantara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Audrey-505/Staff-Write-Up/issues"
+  },
+  "homepage": "https://github.com/Audrey-505/Staff-Write-Up#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4",
+    "jest": "^29.3.1"
+  }
+}
