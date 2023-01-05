@@ -58,7 +58,7 @@ inquirer
         type: 'list',
         name: 'menu',
         choices: [ 'add engineer', new inquirer.Separator(), 'add intern', new inquirer.Separator(), 'finished building team' ],
-        message: 'What license does this application use'
+        message: 'Next Steps'
     },
 ])
 
@@ -70,12 +70,12 @@ inquirer
     const intern = new Intern (data.name, data.id, data.email, data.school)
     teamMembers.push(intern)
 })
-.then((data)=> {
-    const htmlPage = prompts(data)
-    fs.writeFile('index.html', htmlPage, (err) =>
-    err ? console.log(err) : console.log('Successfully created index.html!') 
-    )
-})
+// .then((data)=> {
+//     const htmlPage = prompts(data)
+//     fs.writeFile('index.html', htmlPage, (err) =>
+//     err ? console.log(err) : console.log('Successfully created index.html!') 
+//     )
+// })
 
 
 // .then((data) => {
