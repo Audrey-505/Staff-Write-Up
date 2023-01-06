@@ -21,6 +21,49 @@ const prompts = (teamMembers) => {
   <body>`
 
   // create 3 other const for each type of employee / muniplulate arrays to display dif parts of html (use getRole)
+  
+  const generateManager = manager => {
+    return `
+    <div class = " "> this one goes at the very end of card </div>
+    <div class = " "> this one goes after first two methods (headers) </div>
+    <h2 class = " "> ${manager.getName()}</h2>
+    <h3 class = " "> ${manager.getRole()}</h3>
+    <div class = " "> this one goes after the 3 other details id, email, extra </div>
+    <h4 class = " "> ${manager.getId()}</h4>
+    <h4 class = " "> ${manager.getEmail()}</h4>
+    <h4 class = " "> ${manager.getOfficeNumber()}</h4>`
+  }
+
+  const generateEngineer = engineer => {
+    return `
+    <div class =" ">
+    <div class =" "> 
+    <h2 class = " "> ${engineer.getName()}</h2>
+    <h3 class = " "> ${engineer.getRole()}</h3>
+    </div>
+    <div class = " "> 
+    <h4 class = " "> ${engineer.getId()}</h4>
+    <h4 class = " "> ${engineer.getEmail()}</h4>
+    <h4 class = " "> ${engineer.getGithub()}</h4>
+    </div>
+    </div>`
+  }
+
+  const generateIntern = intern => {
+    return `
+    <div class = " "> 
+    <div class = " "> 
+    <h2 class = " "> ${intern.getName()}</h2>
+    <h3 class = " "> ${intern.getRole()}</h3>
+    </div>
+    <div class = " ">
+    <h4 class = " "> ${intern.getId()}</h4>
+    <h4 class = " "> ${intern.getEmail()}</h4>
+    <h4 class = " "> ${intern.getGithub()}</h4>
+    </div>
+    </div>`
+  }
+  
   const mainPart = `<h1>Hello World</h1>
     <div>
       <h4>${name}</h4>
