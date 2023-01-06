@@ -63,7 +63,7 @@ const prompts = (teamMembers) => {
     </div>
     </div>`
   }
-  
+
   const mainPart = `<h1>Hello World</h1>
     <div>
       <h4>${name}</h4>
@@ -126,6 +126,12 @@ function askEmployees(){
     inquirer
     .prompt([
         {
+            type: 'list',
+            name: 'role',
+            message: `employee's role`,
+            choices: ['Engineer', 'Intern', 'Done']
+        },
+        {
             type:'input',
             name: 'name',
             message: `employee's name`
@@ -139,12 +145,6 @@ function askEmployees(){
             type: 'input',
             name: 'email',
             message: `employee's email`
-        },
-        {
-            type: 'list',
-            name: 'role',
-            message: `employee's role`,
-            choices: ['Engineer', 'Intern', 'Done']
         }
     ]).then((data)=> {
         let currentName = data.name
