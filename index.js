@@ -52,6 +52,7 @@ const generateManager = currentManager => {
     </div>`
   }
 
+
 //might the parameter need to be teamMembers instead of data?
 generateHTML = (teamMembers) => {
      employeeArray = []
@@ -202,16 +203,15 @@ function askEmployees(){
             })
         }
         if (data.role === 'Done'){
-            const htmlPage = prompts(teamMembers)
-            // fs.writeFile('index.html', htmlPage, (err) =>
-            //     err ? console.log(err) : console.log('Successfully created index.html!')
-            // )
+            console.log(teamMembers)
+            const newParam = JSON.stringify(teamMembers)
+            const htmlPage = prompts(newParam)
+            fs.writeFile('index.html', htmlPage, (err) =>
+                err ? console.log(err) : console.log('Successfully created index.html!')
+            )
         }
     })
 }
-
-
-
 
 askManager()
 // .then(teamMembers => {
