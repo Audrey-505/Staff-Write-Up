@@ -7,84 +7,105 @@ const Manager = require('./lib/manager')
 
 let teamMembers = []
 
-const prompts = (teamMembers) => {
-    console.log(teamMembers)
-    const topPart = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>`
 
   // create 3 other const for each type of employee / muniplulate arrays to display dif parts of html (use getRole)
-  
-  const generateManager = manager => {
+
+const generateManager = currentManager => {
     return `
     <div class = " "> this one goes at the very end of card </div>
     <div class = " "> this one goes after first two methods (headers) </div>
-    <h2 class = " "> ${manager.getName()}</h2>
-    <h3 class = " "> ${manager.getRole()}</h3>
+    <h2 class = " "> ${currentManager.getName()}</h2>
+    <h3 class = " "> ${currentManager.getRole()}</h3>
     <div class = " "> this one goes after the 3 other details id, email, extra </div>
-    <h4 class = " "> ${manager.getId()}</h4>
-    <h4 class = " "> ${manager.getEmail()}</h4>
-    <h4 class = " "> ${manager.getOfficeNumber()}</h4>`
+    <h4 class = " "> ${currentManager.getId()}</h4>
+    <h4 class = " "> ${currentManager.getEmail()}</h4>
+    <h4 class = " "> ${currentManager.getOfficeNumber()}</h4>`
   }
 
-  const generateEngineer = engineer => {
+  const generateEngineer = currentEngineer => {
     return `
     <div class =" ">
     <div class =" "> 
-    <h2 class = " "> ${engineer.getName()}</h2>
-    <h3 class = " "> ${engineer.getRole()}</h3>
+    <h2 class = " "> ${currentEngineer.getName()}</h2>
+    <h3 class = " "> ${currentEngineer.getRole()}</h3>
     </div>
     <div class = " "> 
-    <h4 class = " "> ${engineer.getId()}</h4>
-    <h4 class = " "> ${engineer.getEmail()}</h4>
-    <h4 class = " "> ${engineer.getGithub()}</h4>
+    <h4 class = " "> ${currentEngineer.getId()}</h4>
+    <h4 class = " "> ${currentEngineer.getEmail()}</h4>
+    <h4 class = " "> ${currentEngineer.getGithub()}</h4>
     </div>
     </div>`
   }
 
-  const generateIntern = intern => {
+  const generateIntern = currentIntern => {
     return `
     <div class = " "> 
     <div class = " "> 
-    <h2 class = " "> ${intern.getName()}</h2>
-    <h3 class = " "> ${intern.getRole()}</h3>
+    <h2 class = " "> ${currentIntern.getName()}</h2>
+    <h3 class = " "> ${currentIntern.getRole()}</h3>
     </div>
     <div class = " ">
-    <h4 class = " "> ${intern.getId()}</h4>
-    <h4 class = " "> ${intern.getEmail()}</h4>
-    <h4 class = " "> ${intern.getGithub()}</h4>
+    <h4 class = " "> ${currentIntern.getId()}</h4>
+    <h4 class = " "> ${currentIntern.getEmail()}</h4>
+    <h4 class = " "> ${currentIntern.getSchool()}</h4>
     </div>
     </div>`
   }
 
-  const mainPart = `<h1>Hello World</h1>
-    <div>
-      <h4>${name}</h4>
-      <h4>${id}</h4>
-      <h4>${email}</h4>
-    </div>`
+//might the parameter need to be teamMembers instead of data?
+generateHTML = (data) => {
+     employeeArray = []
 
-  const bottomPart = `</body>
-  </html>
-  `
-  
+    for (i = 0; i < data.length; i++) {
+        const employee = data[i]
+        const role = employee.getRole()
+
+        if (role === 'Manager') {
+            const managerCard = generateManager(employee)
+            employeeArray.push(managerCard)
+        }
+
+        if (role === 'Engineer') {
+            const engineerCard = generateEngineer(employee)
+            employeeArray.push(engineerCard)
+        }
+
+        if (role === 'Intern') {
+            const internCard = generateIntern(employee)
+            employeeArray.push(internCard)
+        }
+
+        if (role === 'Done') {
+            return
+        }
+    }
+
+    const staffCards = employeeArray.join('')
+
+    const createTeam = prompts(staffCards)
+    return createTeam
+
 }
 
-
-// .then((data)=> {
-//     const htmlPage = prompts(data)
-//     fs.writeFile('index.html', htmlPage, (err) =>
-//     err ? console.log(err) : console.log('Successfully created index.html!') 
-//     )
-// })
-
+const prompts = (staffCards) => {
+    console.log(staffCards)
+    return 
+  `<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>HTML 5 Boilerplate</title>
+      <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <h1>My Team</h1>
+      ${staffCards}
+      </body>
+      </html>`
+  
+}
 
 
 // Would creating functions for each type of employee be right?
@@ -182,11 +203,25 @@ function askEmployees(){
         }
         if (data.role === 'Done'){
             const htmlPage = prompts(teamMembers)
-            //fs.writeFile('index.html', htmlPage, (err) =>
+            // fs.writeFile('index.html', htmlPage, (err) =>
             //     err ? console.log(err) : console.log('Successfully created index.html!')
             // )
         }
     })
 }
 
+
+
+
 askManager()
+
+
+
+
+
+// .then((data)=> {
+//     const htmlPage = prompts(data)
+//     fs.writeFile('index.html', htmlPage, (err) =>
+//     err ? console.log(err) : console.log('Successfully created index.html!') 
+//     )
+// })
