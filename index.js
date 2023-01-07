@@ -12,24 +12,27 @@ let teamMembers = []
 
 const generateManager = currentManager => {
     return `
-    <div class = " "> this one goes at the very end of card </div>
-    <div class = " "> this one goes after first two methods (headers) </div>
+    <div class = "card"> 
+    <div class = "card-title"> 
     <h2 class = " "> ${currentManager.getName()}</h2>
     <h3 class = " "> ${currentManager.getRole()}</h3>
-    <div class = " "> this one goes after the 3 other details id, email, extra </div>
+    </div>
+    <div class = "card-items"> 
     <h4 class = " "> ${currentManager.getId()}</h4>
     <h4 class = " "> ${currentManager.getEmail()}</h4>
-    <h4 class = " "> ${currentManager.getOfficeNumber()}</h4>`
+    <h4 class = " "> ${currentManager.getOfficeNumber()}</h4>
+    </div>
+    </div>`
   }
 
   const generateEngineer = currentEngineer => {
     return `
-    <div class =" ">
-    <div class =" "> 
+    <div class ="card">
+    <div class ="card-title"> 
     <h2 class = " "> ${currentEngineer.getName()}</h2>
     <h3 class = " "> ${currentEngineer.getRole()}</h3>
     </div>
-    <div class = " "> 
+    <div class = "card-items"> 
     <h4 class = " "> ${currentEngineer.getId()}</h4>
     <h4 class = " "> ${currentEngineer.getEmail()}</h4>
     <h4 class = " "> ${currentEngineer.getGithub()}</h4>
@@ -39,12 +42,12 @@ const generateManager = currentManager => {
 
   const generateIntern = currentIntern => {
     return `
-    <div class = " "> 
-    <div class = " "> 
+    <div class = "card"> 
+    <div class = "card-title"> 
     <h2 class = " "> ${currentIntern.getName()}</h2>
     <h3 class = " "> ${currentIntern.getRole()}</h3>
     </div>
-    <div class = " ">
+    <div class = "card-items">
     <h4 class = " "> ${currentIntern.getId()}</h4>
     <h4 class = " "> ${currentIntern.getEmail()}</h4>
     <h4 class = " "> ${currentIntern.getSchool()}</h4>
@@ -91,21 +94,23 @@ generateHTML = (teamMembers) => {
 
 const prompts = (staffCards) => {
     //console.log(staffCards)
-  `<!DOCTYPE html>
+  return `<!DOCTYPE html>
   <html lang="en">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>HTML 5 Boilerplate</title>
+      <title>Staff List</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
       <link rel="stylesheet" href="style.css">
     </head>
     <body>
-      <h1>My Team</h1>
+    <nav class="navbar bg-body-tertiary">      
+    <h1>My Team</h1>
+    </nav>
       ${staffCards}
       </body>
       </html>`
-  
 }
 
 
@@ -203,9 +208,13 @@ function askEmployees(){
             })
         }
         if (data.role === 'Done'){
-            console.log(teamMembers)
-            const newParam = JSON.stringify(teamMembers)
-            const htmlPage = prompts(newParam)
+            //console.log(teamMembers)
+
+            const employCards = generateHTML(teamMembers)
+            //console.log(employCards)
+
+            //const newParam = JSON.stringify(teamMembers)
+            const htmlPage = prompts(employCards)
             fs.writeFile('index.html', htmlPage, (err) =>
                 err ? console.log(err) : console.log('Successfully created index.html!')
             )
