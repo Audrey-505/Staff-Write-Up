@@ -53,11 +53,11 @@ const generateManager = currentManager => {
   }
 
 //might the parameter need to be teamMembers instead of data?
-generateHTML = (data) => {
+generateHTML = (teamMembers) => {
      employeeArray = []
 
-    for (i = 0; i < data.length; i++) {
-        const employee = data[i]
+    for (i = 0; i < teamMembers.length; i++) {
+        const employee = teamMembers[i]
         const role = employee.getRole()
 
         if (role === 'Manager') {
@@ -80,6 +80,7 @@ generateHTML = (data) => {
         }
     }
 
+    //why are we merging the items in array into one string?
     const staffCards = employeeArray.join('')
 
     const createTeam = prompts(staffCards)
@@ -88,8 +89,7 @@ generateHTML = (data) => {
 }
 
 const prompts = (staffCards) => {
-    console.log(staffCards)
-    return 
+    //console.log(staffCards)
   `<!DOCTYPE html>
   <html lang="en">
     <head>
@@ -214,7 +214,12 @@ function askEmployees(){
 
 
 askManager()
-
+// .then(teamMembers => {
+//     return generateHTML(teamMembers)
+// })
+// .catch(err => {
+//     console.log(err)
+// })
 
 
 
