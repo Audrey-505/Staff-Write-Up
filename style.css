@@ -1,11 +1,17 @@
+nav {
+    text-align: center;
+}
+
 .card {
-background-color: red;
+    margin: 100px auto;
+    justify-content: space-evenly;
+    display: flex;
 }
 
-.card-title {
-    background-color: blue;
+.card-body {
+    background-color: #D6E4E5;
 }
 
-.card-item {
-    background-color: green;
+.list-group-item {
+    background-color: #EFF5F5;
 }

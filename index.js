@@ -15,11 +15,11 @@ const generateManager = currentManager => {
     <div class="card" style="width: 18rem;">
     <div class="card-body">
     <h5 class="card-title">${currentManager.getName()}</h5>
-    <h5 class="card-title">${currentManager.getRole()}</h5>
+    <h5 class="card-title">${currentManager.getRole()} <i class="bi bi-clipboard"></i></h5>
     </div>
     <ul class="list-group list-group-flush">
     <li class="list-group-item">ID: ${currentManager.getId()}</li>
-    <li class="list-group-item">Email: ${currentManager.getEmail()}</li>
+    <li class="list-group-item">Email: <a href="mailto:${currentManager.getEmail()}">${currentManager.getEmail()}</a></li>
     <li class="list-group-item">Office Number: ${currentManager.getOfficeNumber()}</li>
     </ul>
     </div>
@@ -31,12 +31,12 @@ const generateManager = currentManager => {
     <div class="card" style="width: 18rem;">
     <div class="card-body">
     <h5 class="card-title">${currentEngineer.getName()}</h5>
-    <h5 class="card-title">${currentEngineer.getRole()}</h5>
+    <h5 class="card-title">${currentEngineer.getRole()} <i class="fa-solid fa-glasses"></i></h5>
     </div>
     <ul class="list-group list-group-flush">
     <li class="list-group-item">ID: ${currentEngineer.getId()}</li>
-    <li class="list-group-item">Email: ${currentEngineer.getEmail()}</li>
-    <li class="list-group-item">GitHub: ${currentEngineer.getGithub()}</li>
+    <li class="list-group-item">Email: <a href="mailto:${currentEngineer.getEmail()}">${currentEngineer.getEmail()}</a></li>
+    <li class="list-group-item">GitHub: <a href="https://github.com/${currentEngineer.getGithub()}">${currentEngineer.getGithub()}</a></li>
     </ul>
     </div>
     </div>`
@@ -47,11 +47,11 @@ const generateManager = currentManager => {
     <div class="card" style="width: 18rem;">
     <div class="card-body">
     <h5 class="card-title">${currentIntern.getName()}</h5>
-    <h5 class="card-title">${currentIntern.getRole()}</h5>
+    <h5 class="card-title">${currentIntern.getRole()} <i class="fa-solid fa-graduation-cap"></i></h5>
     </div>
     <ul class="list-group list-group-flush">
     <li class="list-group-item">ID: ${currentIntern.getId()}</li>
-    <li class="list-group-item">Email: ${currentIntern.getEmail()}</li>
+    <li class="list-group-item">Email: <a href="mailto:${currentIntern.getEmail()}">${currentIntern.getEmail()}</a></li>
     <li class="list-group-item">School: ${currentIntern.getSchool()}</li>
     </ul>
     </div>
@@ -81,10 +81,9 @@ generateHTML = (teamMembers) => {
             const internCard = generateIntern(employee)
             employeeArray.push(internCard)
         }
-
-        if (role === 'Done') {
-            return
-        }
+        // if (role === 'Done') {
+        //     return
+        // }
     }
 
     //why are we merging the items in array into one string?
@@ -104,11 +103,12 @@ const prompts = (staffCards) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>Staff List</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
       <link rel="stylesheet" href="style.css">
     </head>
     <body>
-    <nav class="navbar bg-body-tertiary">      
+    <nav class="navbar justify-content-center bg-body-tertiary">      
     <h1>My Team</h1>
     </nav>
       ${staffCards}
@@ -159,7 +159,7 @@ function askEmployees(){
             type: 'list',
             name: 'role',
             message: `employee's role`,
-            choices: ['Engineer', 'Intern', 'Done']
+            choices: ['Engineer', 'Intern']
         },
         {
             type:'input',
@@ -187,12 +187,33 @@ function askEmployees(){
                     type: 'input',
                     name: 'github',
                     message: `engineer's github`
+                },
+                {
+                    type: 'confirm',
+                    name: 'addMore',
+                    message: 'Add more employees?',
+                    default: false
                 }
             ]).then((data) => {
                 let engineerGithub = data.github
-                let currentEngineer = new Engineer(currentName, currentId, currentEmail, engineerGithub)
+                let moreEmploy = data.addMore
+                let currentEngineer = new Engineer(currentName, currentId, currentEmail, engineerGithub, moreEmploy)
                 teamMembers.push(currentEngineer)
-                askEmployees()
+                if (moreEmploy){
+                    return askEmployees()
+                } else {
+                    //return teamMembers
+
+                    const employCards = generateHTML(teamMembers)
+                    //console.log(employCards)
+        
+                    //const newParam = JSON.stringify(teamMembers)
+                    const htmlPage = prompts(employCards)
+                    fs.writeFile('index.html', htmlPage, (err) =>
+                        err ? console.log(err) : console.log('Successfully created index.html!')
+                    )
+                }
+                //askEmployees()
             })
         }
         if (data.role === 'Intern'){
@@ -202,30 +223,66 @@ function askEmployees(){
                     type: 'input',
                     name: 'school',
                     message: `intern's school`
+                },
+                {
+                    type: 'confirm',
+                    name: 'addMore',
+                    message: 'Add more employees?',
+                    default: false
                 }
             ]).then((data) => {
                 let internSchool = data.school
-                let currentIntern = new Intern(currentName, currentId, currentEmail, internSchool)
+                let moreEmploy = data.addMore
+                let currentIntern = new Intern(currentName, currentId, currentEmail, internSchool, moreEmploy)
                 teamMembers.push(currentIntern)
-                askEmployees()
+                if (moreEmploy){
+                    return askEmployees()
+                } else {
+                    //return teamMembers
+
+                    const employCards = generateHTML(teamMembers)
+                    //console.log(employCards)
+        
+                    //const newParam = JSON.stringify(teamMembers)
+                    const htmlPage = prompts(employCards)
+                    fs.writeFile('index.html', htmlPage, (err) =>
+                        err ? console.log(err) : console.log('Successfully created index.html!')
+                    )
+                }
+                //askEmployees()
             })
         }
-        if (data.role === 'Done'){
-            //console.log(teamMembers)
+        // if (data.role === 'Done'){
+        //     //console.log(teamMembers)
 
-            const employCards = generateHTML(teamMembers)
-            //console.log(employCards)
+        //     // const employCards = generateHTML(teamMembers)
+        //     // //console.log(employCards)
 
-            //const newParam = JSON.stringify(teamMembers)
-            const htmlPage = prompts(employCards)
-            fs.writeFile('index.html', htmlPage, (err) =>
-                err ? console.log(err) : console.log('Successfully created index.html!')
-            )
-        }
+        //     // //const newParam = JSON.stringify(teamMembers)
+        //     // const htmlPage = prompts(employCards)
+        //     // fs.writeFile('index.html', htmlPage, (err) =>
+        //     //     err ? console.log(err) : console.log('Successfully created index.html!')
+        //     // )
+        // }
     })
 }
 
 askManager()
+
+// .then(teamMembers =>{
+//     //console.log(generateHTML(teamMembers))
+//     return generateHTML(teamMembers)
+// })
+// .then(htmlPage => {
+//     //const employCards = generateHTML(teamMembers)
+//     //const htmlPage = prompts(employCards)
+//     return fs.writeFile('index.html', htmlPage, (err) => 
+//     err ? console.log(err) : console.log('Successfully created index.html!'))
+// })
+
+
+
+
 // .then(teamMembers => {
 //     return generateHTML(teamMembers)
 // })
