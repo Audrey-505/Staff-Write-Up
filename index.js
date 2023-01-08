@@ -146,7 +146,7 @@ function askManager(){
     let currentEmail = data.email
     let currentId = data.id
     let currentOfficeNum = data.officeNumber
-    const currentManager = new Manager(currentName, currentEmail, currentId, currentOfficeNum)
+    const currentManager = new Manager(currentName, currentId, currentEmail, currentOfficeNum)
     teamMembers.push(currentManager)
     askEmployees()
  })
@@ -208,12 +208,11 @@ function askEmployees(){
                     //console.log(employCards)
         
                     //const newParam = JSON.stringify(teamMembers)
-                    const htmlPage = prompts(employCards)
-                    fs.writeFile('index.html', htmlPage, (err) =>
+                    //const htmlPage = prompts(employCards)
+                    fs.writeFile('index.html', employCards, (err) =>
                         err ? console.log(err) : console.log('Successfully created index.html!')
                     )
                 }
-                //askEmployees()
             })
         }
         if (data.role === 'Intern'){
@@ -244,12 +243,11 @@ function askEmployees(){
                     //console.log(employCards)
         
                     //const newParam = JSON.stringify(teamMembers)
-                    const htmlPage = prompts(employCards)
-                    fs.writeFile('index.html', htmlPage, (err) =>
+                    //const htmlPage = prompts(employCards)
+                    fs.writeFile('index.html', employCards, (err) =>
                         err ? console.log(err) : console.log('Successfully created index.html!')
                     )
                 }
-                //askEmployees()
             })
         }
         // if (data.role === 'Done'){
