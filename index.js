@@ -12,45 +12,48 @@ let teamMembers = []
 
 const generateManager = currentManager => {
     return `
-    <div class = "card"> 
-    <div class = "card-title"> 
-    <h2 class = " "> ${currentManager.getName()}</h2>
-    <h3 class = " "> ${currentManager.getRole()}</h3>
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">${currentManager.getName()}</h5>
+    <h5 class="card-title">${currentManager.getRole()}</h5>
     </div>
-    <div class = "card-items"> 
-    <h4 class = " "> ${currentManager.getId()}</h4>
-    <h4 class = " "> ${currentManager.getEmail()}</h4>
-    <h4 class = " "> ${currentManager.getOfficeNumber()}</h4>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">ID: ${currentManager.getId()}</li>
+    <li class="list-group-item">Email: ${currentManager.getEmail()}</li>
+    <li class="list-group-item">Office Number: ${currentManager.getOfficeNumber()}</li>
+    </ul>
     </div>
     </div>`
   }
 
   const generateEngineer = currentEngineer => {
     return `
-    <div class ="card">
-    <div class ="card-title"> 
-    <h2 class = " "> ${currentEngineer.getName()}</h2>
-    <h3 class = " "> ${currentEngineer.getRole()}</h3>
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">${currentEngineer.getName()}</h5>
+    <h5 class="card-title">${currentEngineer.getRole()}</h5>
     </div>
-    <div class = "card-items"> 
-    <h4 class = " "> ${currentEngineer.getId()}</h4>
-    <h4 class = " "> ${currentEngineer.getEmail()}</h4>
-    <h4 class = " "> ${currentEngineer.getGithub()}</h4>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">ID: ${currentEngineer.getId()}</li>
+    <li class="list-group-item">Email: ${currentEngineer.getEmail()}</li>
+    <li class="list-group-item">GitHub: ${currentEngineer.getGithub()}</li>
+    </ul>
     </div>
     </div>`
   }
 
   const generateIntern = currentIntern => {
     return `
-    <div class = "card"> 
-    <div class = "card-title"> 
-    <h2 class = " "> ${currentIntern.getName()}</h2>
-    <h3 class = " "> ${currentIntern.getRole()}</h3>
+    <div class="card" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">${currentIntern.getName()}</h5>
+    <h5 class="card-title">${currentIntern.getRole()}</h5>
     </div>
-    <div class = "card-items">
-    <h4 class = " "> ${currentIntern.getId()}</h4>
-    <h4 class = " "> ${currentIntern.getEmail()}</h4>
-    <h4 class = " "> ${currentIntern.getSchool()}</h4>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">ID: ${currentIntern.getId()}</li>
+    <li class="list-group-item">Email: ${currentIntern.getEmail()}</li>
+    <li class="list-group-item">School: ${currentIntern.getSchool()}</li>
+    </ul>
     </div>
     </div>`
   }
