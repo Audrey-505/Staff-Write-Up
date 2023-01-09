@@ -37,7 +37,7 @@ N/A
 
 ## Tests
 
-<npx jest> command can be used to test the application 
+'npx jest'command can be used to test the application 
 
 ## Questions
 
