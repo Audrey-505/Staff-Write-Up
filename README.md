@@ -1,6 +1,6 @@
 # Staff-Write-Up
 
-<img alt= "Git-License" src="https://img.shields.io/badge/license-Apache License 2.0-green">
+<img alt= "Git-License" src="https://img.shields.io/badge/license-GNU General Public License v2.0-green">
 
 
 ## Description 
@@ -29,7 +29,7 @@ Run the application and answer the prompts to obtain a neat display of all staff
 
 ## License 
 
-
+This application uses GNU General Public License v2.0 license
 
 ## Contributing 
 
