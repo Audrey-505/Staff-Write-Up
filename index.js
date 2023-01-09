@@ -15,7 +15,7 @@ const generateManager = currentManager => {
     <div class="card" style="width: 18rem;">
     <div class="card-body">
     <h5 class="card-title">${currentManager.getName()}</h5>
-    <h5 class="card-title">${currentManager.getRole()} <i class="bi bi-clipboard"></i></h5>
+    <h5 class="card-title">${currentManager.getRole()} <i class="fa-regular fa-clipboard"></i></h5>
     </div>
     <ul class="list-group list-group-flush">
     <li class="list-group-item">ID: ${currentManager.getId()}</li>
