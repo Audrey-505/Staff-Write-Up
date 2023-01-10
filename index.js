@@ -7,9 +7,6 @@ const Manager = require('./lib/manager')
 
 let teamMembers = []
 
-
-// create 3 other const for each type of employee / muniplulate arrays to display dif parts of html (use getRole)
-
 const generateManager = currentManager => {
     return `
     <div class="card" style="width: 18rem;">
@@ -58,8 +55,6 @@ const generateIntern = currentIntern => {
     </div>`
 }
 
-
-//might the parameter need to be teamMembers instead of data?
 generateHTML = (teamMembers) => {
     employeeArray = []
 
@@ -81,12 +76,7 @@ generateHTML = (teamMembers) => {
             const internCard = generateIntern(employee)
             employeeArray.push(internCard)
         }
-        // if (role === 'Done') {
-        //     return
-        // }
     }
-
-    //why are we merging the items in array into one string?
     const staffCards = employeeArray.join('')
 
     const createTeam = prompts(staffCards)
@@ -116,8 +106,6 @@ const prompts = (staffCards) => {
       </html>`
 }
 
-
-// Would creating functions for each type of employee be right?
 function askManager() {
     inquirer
         .prompt([
@@ -202,13 +190,7 @@ function askEmployees() {
                         if (moreEmploy) {
                             return askEmployees()
                         } else {
-                            //return teamMembers
-
                             const employCards = generateHTML(teamMembers)
-                            //console.log(employCards)
-
-                            //const newParam = JSON.stringify(teamMembers)
-                            //const htmlPage = prompts(employCards)
                             fs.writeFile('index.html', employCards, (err) =>
                                 err ? console.log(err) : console.log('Successfully created index.html!')
                             )
@@ -237,63 +219,15 @@ function askEmployees() {
                         if (moreEmploy) {
                             return askEmployees()
                         } else {
-                            //return teamMembers
-
                             const employCards = generateHTML(teamMembers)
-                            //console.log(employCards)
-
-                            //const newParam = JSON.stringify(teamMembers)
-                            //const htmlPage = prompts(employCards)
                             fs.writeFile('index.html', employCards, (err) =>
                                 err ? console.log(err) : console.log('Successfully created index.html!')
                             )
                         }
                     })
             }
-            // if (data.role === 'Done'){
-            //     //console.log(teamMembers)
-
-            //     // const employCards = generateHTML(teamMembers)
-            //     // //console.log(employCards)
-
-            //     // //const newParam = JSON.stringify(teamMembers)
-            //     // const htmlPage = prompts(employCards)
-            //     // fs.writeFile('index.html', htmlPage, (err) =>
-            //     //     err ? console.log(err) : console.log('Successfully created index.html!')
-            //     // )
-            // }
+           
         })
 }
 
 askManager()
-
-// .then(teamMembers =>{
-//     //console.log(generateHTML(teamMembers))
-//     return generateHTML(teamMembers)
-// })
-// .then(htmlPage => {
-//     //const employCards = generateHTML(teamMembers)
-//     //const htmlPage = prompts(employCards)
-//     return fs.writeFile('index.html', htmlPage, (err) => 
-//     err ? console.log(err) : console.log('Successfully created index.html!'))
-// })
-
-
-
-
-// .then(teamMembers => {
-//     return generateHTML(teamMembers)
-// })
-// .catch(err => {
-//     console.log(err)
-// })
-
-
-
-
-// .then((data)=> {
-//     const htmlPage = prompts(data)
-//     fs.writeFile('index.html', htmlPage, (err) =>
-//     err ? console.log(err) : console.log('Successfully created index.html!') 
-//     )
-// })
